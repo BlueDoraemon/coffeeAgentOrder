@@ -1,4 +1,4 @@
-# coffeeAgentOrder
+# Coffee Agent Order
 An intelligent system using LLM agents and function calling to transform ambiguous coffee orders into precise, standardized outputs.
 System Architecture
 Core Components
