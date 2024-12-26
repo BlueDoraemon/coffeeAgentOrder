@@ -7,8 +7,10 @@ Core Components
 - PostgreSQL database for order validation
 - JSON response generator
 
+``` mermaid 
 graph TD
     A[Ambiguous Order Input] --> B[LLM Agent]
     B --> C[Function Calls]
     C --> D[Database Validation]
     D --> E[Standardized JSON Output]
+```
