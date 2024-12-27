@@ -14,3 +14,20 @@ graph TD
     C --> D[Database Validation]
     D --> E[Standardized JSON Output]
 ```
+
+
+## Using Google Gemini API
+
+Get an api key:
+https://ai.google.dev/gemini-api/docs/api-key
+
+Store your API key as an environment variable:
+For Linux/macOS (Bash):
+```bash
+export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
+```
+
+For Windows:
+```bash
+set GEMINI_API_KEY=<YOUR_API_KEY_HERE>
+```
