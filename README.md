@@ -27,7 +27,15 @@ For Linux/macOS (Bash):
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-For Windows:
+** For Windows: **
+Windows
 ```bash
-set GEMINI_API_KEY=<YOUR_API_KEY_HERE>
+    setx GEMINI_API_KEY "your_key_here"
 ```
+or 
+Search for "Environment Variables" in the system settings
+Edit either "User variables" (for current user) or "System variables" (for all users - use with caution).
+Create the variable and add export GEMINI_API_KEY=your_key_here
+Apply the changes
+
+After applying changes to environment variables please restart your IDE
