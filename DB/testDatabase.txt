@@ -5,3 +5,4 @@
 #5 Latte
 #6 Cappucino
 #7 3/4 Double Ristretto Flat White
+#8 Hot chocolate
