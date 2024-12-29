@@ -24,6 +24,7 @@ result = coffeeAgent.run_sync("What is an americano?")
 print(result.data)
 judgeResult = judgeAgent.run_sync("Test waht is the capital of Mexico?")
 print("Judge agent:" + judgeResult.data)
+
 # @app.post("/api/chat")
 # async def chat_endpoint(message: str):
 #     result = await agent.run(message)

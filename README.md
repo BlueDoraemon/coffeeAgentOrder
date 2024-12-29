@@ -14,6 +14,29 @@ graph TD
     C --> D[Database Validation]
     D --> E[Standardized JSON Output]
 ```
+## Database (Supabase Postgres)
+``` mermaid
+erDiagram
+    coffee_types {
+        uuid id PK
+        text item_id
+        text name
+        text description
+        numeric base_price
+        bool available
+        jsonb allowed_modifiers
+    }
+
+    modifiers {
+        uuid id PK
+        text name
+        text type
+        jsonb options
+        numeric additional_cost
+    }
+
+    coffee_types ||--o{ modifiers : has
+```
 
 
 ## Using Google Gemini API
