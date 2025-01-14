@@ -4,40 +4,63 @@
 
 # Contributor: Lixang Li lli32@myune.edu.au
 
-
-import os
+from dataclasses import dataclass, field
+from typing import Optional, List, Dict, Any
 from supabase import create_client, Client
-from pydantic import BaseModel
 from supabase.client import ClientOptions
+import logging
+import os
 
-# initialise Supabase client
+def create_supabase_client() -> Optional[Client]:
+    """Create and return a Supabase client instance."""
+    try:
+        return create_client(
+            supabase_url=os.environ.get("SUPABASE_URL"),
+            supabase_key=os.environ.get("SUPABASE_KEY"),
+            options=ClientOptions(
+                postgrest_client_timeout=10,
+                storage_client_timeout=10,
+                schema="public"
+            )
+        )
+    except ValueError as e:
+        logging.error(f"Supabase client initialization failed: {e}")
+        return None
 
-url: str = os.environ.get("SUPABASE_URL")
-key: str = os.environ.get("SUPABASE_KEY")
+class DatabaseOperations:
+    """Database operations for coffee shop management."""
+    
+    def __init__(self, supabase_client: Optional[Client] = None):
+        self.client = supabase_client or create_supabase_client()
+        if not self.client:
+            raise ValueError("Supabase client not initialized")
 
-supabase: Client = create_client(url, key,  
-        options=ClientOptions(
-        postgrest_client_timeout=10,
-        storage_client_timeout=10,
-        schema="public"
-    ))
+    def get_coffees(self) -> Optional[List[Dict]]:
+        """Retrieve all coffee types."""
+        try:
+            response = self.client.table("coffee_types").select("*").execute()
+            return response.get('data')
+        except Exception as e:
+            logging.error(f"Error fetching coffees: {e}")
+            return None
 
+    def get_modifiers(self) -> Optional[List[Dict]]:
+        """Retrieve all modifiers."""
+        try:
+            response = self.client.table("modifiers").select("*").execute()
+            return response.get('data')
+        except Exception as e:
+            logging.error(f"Error fetching modifiers: {e}")
+            return None
 
+        def add_coffee(self):
+            """Add a new coffee type."""
+            return NotImplemented
 
-def get_coffees():
+        def add_order(self):
+            """Add a new order."""
+            return NotImplemented
 
-    response = supabase.table("coffee_types").select("*").execute()
-    return response
-
-def get_modifiers():
-
-    return NotImplemented
-
-def add_coffee():
-
-    return NotImplemented
-def add_order():
-    return NotImplemented
-
-def get_orders():
-    return NotImplemented
+        def get_orders(self):
+            """Retrieve all orders."""
+            return NotImplemented
