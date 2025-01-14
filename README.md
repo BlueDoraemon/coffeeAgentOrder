@@ -61,4 +61,18 @@ Edit either "User variables" (for current user) or "System variables" (for all u
 Create the variable and add export GEMINI_API_KEY=your_key_here
 Apply the changes
 
+
+## Using Supabase API
+To run this application, you need to set up the following environment variables:
+
+```bash
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_KEY=your_supabase_api_key
+```
+
+You can obtain these values from your Supabase project settings:
+SUPABASE_URL: Your project URL found in Project Settings > API
+SUPABASE_KEY: Your project API key found in Project Settings > API
+
+
 After applying changes to environment variables please restart your IDE
