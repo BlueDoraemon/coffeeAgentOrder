@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 from typing import Optional, List, Dict, Any
 from supabase import create_client, Client
 from supabase.client import ClientOptions
+from config import get_key
 import logging
 import os
 
@@ -15,8 +16,8 @@ def create_supabase_client() -> Optional[Client]:
     """Create and return a Supabase client instance."""
     try:
         return create_client(
-            supabase_url=os.environ.get("SUPABASE_URL"),
-            supabase_key=os.environ.get("SUPABASE_KEY"),
+            supabase_url=get_key("SUPABASE_URL"),
+            supabase_key=get_key("SUPABASE_KEY"),
             options=ClientOptions(
                 postgrest_client_timeout=10,
                 storage_client_timeout=10,
