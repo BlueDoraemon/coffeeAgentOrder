@@ -39,36 +39,26 @@ erDiagram
 ```
 
 
+
+API Configuration
+Create a .env file in the project root directory with the following variables:
+```bash
+# Supabase Configuration
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_KEY=your_supabase_api_key
+
+# Google Gemini API
+GEMINI_API_KEY=<YOUR_API_KEY_HERE>
+```
+
+
 ## Using Google Gemini API
 
 Get an api key:
 https://ai.google.dev/gemini-api/docs/api-key
 
-Store your API key as an environment variable:
-For Linux/macOS (Bash):
-```bash
-export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
-```
-
-** For Windows: **
-Windows
-```bash
-    setx GEMINI_API_KEY "your_key_here"
-```
-or 
-Search for "Environment Variables" in the system settings
-Edit either "User variables" (for current user) or "System variables" (for all users - use with caution).
-Create the variable and add export GEMINI_API_KEY=your_key_here
-Apply the changes
-
 
 ## Using Supabase API
-To run this application, you need to set up the following environment variables:
-
-```bash
-SUPABASE_URL=your_supabase_project_url
-SUPABASE_KEY=your_supabase_api_key
-```
 
 You can obtain these values from your Supabase project settings:
 SUPABASE_URL: Your project URL found in Project Settings > API
