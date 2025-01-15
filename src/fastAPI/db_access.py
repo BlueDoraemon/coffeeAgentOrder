@@ -39,8 +39,8 @@ class DatabaseOperations:
     def get_coffees(self) -> Optional[List[Dict]]:
         """Retrieve all coffee types."""
         try:
-            response = self.client.table("coffee_types").select("*").execute()
-            return response.get('data')
+            api_response = self.client.table("coffee_types").select("*").execute()
+            return api_response.data
         except Exception as e:
             logging.error(f"Error fetching coffees: {e}")
             return None
@@ -49,7 +49,7 @@ class DatabaseOperations:
         """Retrieve all modifiers."""
         try:
             response = self.client.table("modifiers").select("*").execute()
-            return response.get('data')
+            return response.data
         except Exception as e:
             logging.error(f"Error fetching modifiers: {e}")
             return None

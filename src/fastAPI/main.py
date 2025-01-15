@@ -16,18 +16,26 @@ from db_access import create_supabase_client
 from dataclasses import dataclass, field
 from config import get_key
 from db_agent import create_db_agent
+from pydantic_ai.models.openai import OpenAIModel
+
 
 
 # Get required api keys
 app = FastAPI()
 
-create_supabase_client()
-
 model = GeminiModel("gemini-2.0-flash-exp",api_key = get_key('GEMINI_API_KEY'))
+function_calling_model = OpenAIModel(
+    "microsoft/phi-3-medium-128k-instruct:free",  # use phi 3 beccause gemini sucks for tool use
+    base_url="https://openrouter.ai/api/v1",
+    api_key=get_key('OPEN_ROUTER_API_KEY'),
+)
+dbAgent = create_db_agent(function_calling_model)
+# from db_access import DatabaseOperations
+# db = DatabaseOperations()
+# print(db.get_coffees())
 
-dbAgent = create_db_agent(model)
 
-result = dbAgent.run_sync("What coffees can i order?")
+result = dbAgent.run_sync("get coffee types")
 
 print(result.data)
 
