@@ -40,6 +40,8 @@ class DatabaseOperations:
         """Retrieve all coffee types."""
         try:
             api_response = self.client.table("coffee_types").select("*").execute()
+            data = api_response.data
+            print(data)
             return api_response.data
         except Exception as e:
             logging.error(f"Error fetching coffees: {e}")

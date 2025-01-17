@@ -5,6 +5,7 @@ from pydantic_ai import Agent, RunContext, ModelRetry
 from typing import List
 from pydantic import BaseModel, Field
 from typing import List, Dict, Optional
+from dataclasses import dataclass
 import logging
 from db_access import DatabaseOperations
 from typing import Optional, List
@@ -26,13 +27,18 @@ class CoffeeType(BaseModel):
     available: bool
     allowed_modifiers: Optional[List[dict]] = Field(default_factory=list)
 
+@dataclass
+class SupportDependencies:
+    db: DatabaseOperations = DatabaseOperations()
+
 def create_db_agent(model) -> Agent:
     """Initialize agent for coffee shop database operations."""
-
+    db = DatabaseOperations
     db_agent = Agent(
         model=model,
-        deps_type=DatabaseOperations,
-        result_type=List[CoffeeType | Modifier],
+        # deps_type=SupportDependencies,
+        # result_type=List[CoffeeType | Modifier],
+        # result_type= str,
         system_prompt="""
         Database agent for coffee shop inventory management.
         
@@ -56,14 +62,15 @@ def create_db_agent(model) -> Agent:
     #         raise ModelRetry("Empty database response")
     #     return value
 
-    async def report_tool_usage(ctx: RunContext[DatabaseOperations], tool_name: str):
-        """Reports tool usage."""
-        logging.info(f"Database operation: {tool_name}")
+    # async def report_tool_usage(ctx: RunContext[DatabaseOperations], tool_name: str):
+    #     """Reports tool usage."""
+    #     logging.info(f"Database operation: {tool_name}")
 
-    @db_agent.tool(prepare=report_tool_usage)
-    async def get_all_coffees(ctx: RunContext[DatabaseOperations]) -> str:
+    @db_agent.tool
+    async def get_coffees():
         """Get all coffee types."""
-        return await ctx.deps.get_coffees()
+        print("Running")
+        return await db.get_coffees
 
     # @db_agent.tool(prepare=report_tool_usage)
     # async def get_all_modifiers(ctx: RunContext[DatabaseOperations]) -> Optional[List[Dict]]:
