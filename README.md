@@ -7,6 +7,8 @@ Core Components
 - PostgreSQL database for order validation
 - JSON response generator
 
+
+
 ``` mermaid 
 graph TD
     A[Ambiguous Order Input] --> B[LLM Agent]
@@ -38,6 +40,63 @@ erDiagram
     coffee_types ||--o{ modifiers : has
 ```
 
+# Coffee Order System Usage Guide
+
+## Command Line Interface (FOR NOW)
+```bash
+# View available menu
+python main.py --list-menu
+
+# Place a coffee order
+python main.py --order "your coffee order"
+```
+
+## Supported Order Examples
+- Long Black/Americano conversions are automatically handled:
+```bash
+# These orders are equivalent:
+python main.py --order "large long black with 2 sugars"
+python main.py --order "large americano with 2 sugars"
+```
+
+## Order Format Guidelines
+- Size options: small, regular, large
+- Base drinks: long black, americano, flat white, cappuccino, latte
+- Modifiers:
+  - Sugars (e.g., "2 sugars", "no sugar")
+  - Temperature (e.g., "extra hot")
+  - Milk options (e.g., "oat milk", "soy")
+
+## Project Structure
+```
+src/
+├── fastAPI/           # Backend services
+│   ├── agents.py      # AI agent definitions
+│   ├── config.py      # Configuration settings
+│   ├── db_access.py   # Database operations
+│   └── main.py        # Main application
+└── front_end/         # Frontend interface
+    └── app.py         # Streamlit application
+```
+
+## Environment Setup
+1. Create `.env` file with required API keys:
+```env
+GEMINI_API_KEY=your_key
+OPEN_ROUTER_API_KEY=your_key
+SUPABASE_URL=your_url
+SUPABASE_KEY=your_key
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+## Notes
+- The system automatically maps similar drink types (long black ↔ americano)
+- Natural language processing handles variations in order phrasing
+- Database automatically updates with order history
 
 
 API Configuration
